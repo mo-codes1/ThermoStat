@@ -14,7 +14,7 @@ class Thermostat {
     if(this.temp < this.maxtemp) {
       this.temp++;
     }else {
-      
+      return 'max reached'
     }
     
   }
