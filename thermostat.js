@@ -13,6 +13,8 @@ class Thermostat {
   up() {
     if(this.temp < this.maxtemp) {
       this.temp++;
+    }else {
+      
     }
     
   }
@@ -51,7 +53,7 @@ class Thermostat {
   }
 
 }
-   
+  
 
 
 module.exports = Thermostat

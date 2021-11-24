@@ -13,4 +13,16 @@ describe('Thermostat', () => {
     thermostat.down()
     expect(thermostat.getTemperature()).toBe(20);
   });
+  it('sets a power saving mode to true or false', () => {
+    thermostat.setPowerSavingMode(true)
+    expect(thermostat.setMaxTemp()).toBe(25);
+  });
+  it('sets the temp back to default', () => {
+    thermostat.reset()
+    expect(thermostat.getTemperature()).toBe(20);
+  });  
+
+
+
+  
 });
