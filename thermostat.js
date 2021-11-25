@@ -1,59 +1,60 @@
+const min_temp = 10;
+const WeatherApi = require('./weatherApi');
+
+const weather = new WeatherApi();
+weather.fetchWeatherApi(this.city, handleResult)
+
 class Thermostat {
+
   constructor() {
-    this.default = 20;
-    this.temp = this.default;
+    this.temperature = 20;
+    this.maxTemp = 25;
     this.powerSaving = true;
-    this.maxtemp = 25;
+    this.city = undefined
+  }
+
+  setCity(city) {
+      this.city = city
   }
 
   getTemperature() {
-    return this.temp;
-  }
-
-  up() {
-    if(this.temp < this.maxtemp) {
-      this.temp++;
-    }else {
-      return 'max reached'
-    }
+    this.city
+    let temp = weather.fetchWeatherData(this.city, handleResult)
     
   }
 
-  down() {
-    if(this.temp > 10) {
-      this.temp--;
-    }
+  up() {
+    this.temperature >= this.maxTemp ? this.maxTemp : this.temperature++;
   }
 
-  setMaxTemp() {
-    if (this.powerSaving) {
-      this.maxtemp = 25;
-    }else{
-      this.maxtemp = 32;
-    }
+  down() {
+    return this.temperature <= Thermostat.min_temp
+      ? this.temperature
+      : this.temperature--;
   }
-  
-  setPowerSavingMode(boolean) {
-    this.powerSaving = boolean;
-    return this.setMaxTemp();
+
+  static get min_temp() {
+    return min_temp;
+  }
+
+  setPowerSaving(onoff) {
+    this.powerSaving = onoff;
+    this.powerSaving ? this.maxTemp : (this.maxTemp = 32);
   }
 
   reset() {
-    this.temp = this.default
+    this.temperature = 20;
   }
 
-  energyUsage() {
-    if(this.temp < 18) {
-      return "You are on low usage"
-    }else if(this.temp <= 25) {
-      return "You are on medium usage"
-    }else {
-      return "You are on high usage"
+  getCurrentUsage() {
+    if (this.temperature < 18) {
+      return "low-usage";
+    } else if (this.temperature <= 25) {
+      return "medium-usage";
+    } else {
+      return "high-usage";
     }
   }
-
 }
-  
 
-
-module.exports = Thermostat
+module.exports = Thermostat;
